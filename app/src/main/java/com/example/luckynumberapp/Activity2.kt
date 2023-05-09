@@ -25,13 +25,18 @@ class Activity2 : AppCompatActivity() {
         "seu numero da sorte e "+r
 
         button.setOnClickListener {
-            // usando o shareIntent e passando como paremetro uma acao de envio
-            val shareIntent = Intent(Intent.ACTION_SEND)
-            // definindo o tipo da intent
-            shareIntent.type = "text/plain"
-            // usando o putExtra passando o EXTRA_TEXT e um valor como corpo da mensagem
-            shareIntent.putExtra(Intent.EXTRA_TEXT, "meu numero da sorte e $r")
-            startActivity(Intent.createChooser(shareIntent, "Numero da sorte"))
+            shareIntent(r)
         }
+    }
+    private fun shareIntent(result: Int) {
+        // usando o shareIntent e passando como paremetro uma acao de envio
+        val shareIntent = Intent(Intent.ACTION_SEND)
+        // definindo o tipo da intent
+        shareIntent.type = "text/plain"
+        // usando o putExtra passando o EXTRA_TEXT e um valor como corpo da mensagem
+        shareIntent.putExtra(Intent.EXTRA_TEXT, "meu numero da sorte e $result")
+        // usando o putExtra e passando como parametro o subject para criar um assunto
+        shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Olha o meu numero da sorte")
+        startActivity(Intent.createChooser(shareIntent, "Numero da sorte"))
     }
 }
